@@ -5,9 +5,12 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
-            path: '/',
-            name: 'home',
-            component: Dashboard
+            path        : '/',
+            name        : 'dashboard',
+            component   : Dashboard,
+            meta        : {
+                name    : 'Dashboard Page'
+            }
         },
         // {
         //     path: '/about',
@@ -17,27 +20,30 @@ const router = createRouter({
         //     // which is lazy-loaded when the route is visited.
         //     component: () => import('../views/AboutView.vue')
         // },
-        // {
-        //     path      : '/',
-        //     name      : 'dashboard',
-        //     component : () => import('../views/Dashboard.vue')
-        // },
         {
-            path      : '/history',
-            name      : 'history',
-            component : () => import('../components/History.vue'),
-            meta      : {
-                name  : "History Transaction"
+            path        : '/transaksi',
+            name        : 'transaction',
+            component   : () => import('../components/Transaction.vue'),
+            meta        : {
+                name    : "Create Transaction"
             }
         },
-        // {
-        //     path      : '/balance',
-        //     name      : 'balance',
-        //     component : () => import('../components/Balance.vue'),
-        //     meta      : {
-        //         name  : "Your Balance"
-        //     }
-        // }
+        {
+            path        : '/history',
+            name        : 'history',
+            component   : () => import('../components/History.vue'),
+            meta        : {
+                name    : "History Transaction"
+            }
+        },
+        {
+            path        : '/customer',
+            name        : 'customer',
+            component   : () => import('../components/Customer.vue'),
+            meta        : {
+                name    : "Data Customers"
+            }
+        }
     ]
 })
 
