@@ -19,11 +19,11 @@ return new class extends Migration
             $table->enum('type', ['Credit', 'Debet']);
             $table->bigInteger('amount');
             $table->bigInteger('balance');
+            $table->string('customer_id', 50)->index();
             $table->unsignedBigInteger('user_id')->index();
-            $table->unsignedBigInteger('customer_id')->index();
  
+            $table->foreign('customer_id')->references('nisn')->on('customers')->onDelete('restrict');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('restrict');
             $table->timestamps();
         });
     }
