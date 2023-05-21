@@ -1,5 +1,5 @@
 <script setup>
-    import Navbar from '../components/Navbar.vue'
+    import Navbar from './Navbar.vue'
 </script>
 <template>
     <Navbar />
@@ -8,3 +8,10 @@
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi alias error, tempora harum illum ipsam. Voluptatem unde neque sequi eos eaque cupiditate consequuntur, labore in, eveniet non ea pariatur temporibus.</p>
     </div>
 </template>
+<script>
+    export default {
+        created(){
+            // this.$router.go(this.$router.currentRoute)
+        }
+    }
+</script>

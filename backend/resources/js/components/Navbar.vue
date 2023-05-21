@@ -1,8 +1,8 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom mb-4">
         <div class="container-fluid px-3">
             <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-            <a class="navbar-brand" href="#">{{ $route.meta.name }}</a>
+            <a class="navbar-brand fs-3" href="#">{{ $route.meta.name }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -37,11 +37,11 @@
         </div>
     </nav>
     
-    <nav aria-label="breadcrumb" class="px-3 pt-2" v-if="$route.name!='dashboard'">
+    <!-- <nav aria-label="breadcrumb" class="px-3 pt-2" v-if="$route.name!='dashboard'">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item"><a href="#">Library</a></li>
             <li class="breadcrumb-item active" aria-current="page">Data</li>
         </ol>
-    </nav>
+    </nav> -->
 </template>
