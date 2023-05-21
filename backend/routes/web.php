@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +13,12 @@ use App\Http\Controllers\CustomerController;
 |
 */
 
-Route::resource('transaction', TransactionController::class);
-Route::resource('customer', CustomerController::class);
-
 // Route::get('/', function () {
 //     return view('welcome');
+// });
+
+// Route::get('/login', function () {
+//     echo 'Ini halaman login';
 // });
 
 Route::get('/{any}', function () {
