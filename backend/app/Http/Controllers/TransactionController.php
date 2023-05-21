@@ -15,7 +15,8 @@ class TransactionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return Transaction::all();
+        // return Transaction::all();
+        return Transaction::with('User')->get();
     }
 
     /**
@@ -53,7 +54,7 @@ class TransactionController extends Controller
             $save->type         = $request->type;
             $save->amount       = $request->amount;
             $save->balance      = $total;
-            $save->user_id      = 1;
+            $save->user_id      = $request->user_id;
             $save->customer_id  = $request->customer_id;
             $save->save();
             
