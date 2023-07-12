@@ -1,12 +1,24 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0)
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
-  }
+var host = window.location.hostname=='localhost' ? 'http://127.0.0.1:8000/api/' : 'https://api.bidanbersama.com/api/';
 
-  return { count, doubleCount, increment }
+export const useCounterStore = defineStore('counter', () => {
+    state: () => ({
+    //     count       : 0,
+    //     name        : 'Eduardo',
+        url         : host + "",
+    //     role        : null,
+    //     profileName : null,
+    //     user_id     : localStorage.user_id,
+    //     token       : localStorage.token
+    })
+    
+    const count = ref(0)
+    const doubleCount = computed(() => count.value * 2)
+    function increment() {
+        count.value++
+    }
+
+    return { count, doubleCount, increment }
 })

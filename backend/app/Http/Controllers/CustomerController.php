@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Auth;
 
 class CustomerController extends Controller
 {
@@ -16,6 +17,34 @@ class CustomerController extends Controller
      */
     public function index() {
         return Customer::all();
+    }
+
+    public function masuk(Request $request) {
+    // public function masuk() {
+        // $check_login = Auth::attempt($request->only('email', 'password'), false);
+        // if (!$check_login) {
+        //     return response()->json('Gagal', 500);
+        // }
+        // return Auth::id();
+        // if (Auth::attempt(["email"=>$request->email, 'password'=>$request->password])){
+        //     return response()->json('Berhasil', 200);
+        // }
+        
+        $check_login = Auth::guard('customer')->attempt($request->only('nisn'), false);
+        if (!$check_login) {
+            return response()->json('Gagal', 500);
+        }
+        return Auth::id();
+        // return Auth::guard('customer')->check();
+        // return response()->json('Berhasil', 200);
+        // return auth()->user()->createToken("customer-token", ['insert', 'update'])->plainTextToken;
+        // return auth()->user()->createToken("user-token", ['insert', 'update'], now()->modify('+1 hour'))->plainTextToken;
+        // return auth()->user()->createToken("user-token", ['insert', 'update'], now()->modify('+2 minute'))->plainTextToken;
+        // return auth()->user()->createToken([
+        //     'name' => "admin-token",
+        //     'abilities' => "*",
+        //     'expires_at' => 60,
+        // ]);
     }
 
     /**

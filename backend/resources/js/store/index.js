@@ -10,9 +10,13 @@ import { defineStore } from 'pinia'
 var host = window.location.origin;
 export const useBankStore = defineStore('bank', {
     state: () => ({
-        count   : 0,
-        name    : 'Eduardo',
-        url     : host + ""
+        count       : 0,
+        name        : 'Eduardo',
+        url         : host + "",
+        role        : null,
+        profileName : null,
+        user_id     : localStorage.user_id,
+        token       : localStorage.token
     }),
     // state: () => {
     //     return {
@@ -25,6 +29,10 @@ export const useBankStore = defineStore('bank', {
         doubleCount: (state) => state.count * 2,
     },
     actions: {
+        saveProfileName(profileName, role) {
+            this.profileName    = profileName
+            this.role           = role
+        },
         increment() {
             this.count++
         },

@@ -17,6 +17,7 @@ class TransactionController extends Controller
     public function index() {
         // return Transaction::all();
         return Transaction::with('User')->get();
+        // return Transaction::with('User', 'Customer')->get();
     }
 
     /**
@@ -75,7 +76,7 @@ class TransactionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Transaction $transaction) {
-        // return Transaction::where('customer_id', $transaction->id)->get();
+        return Transaction::with('User')->where('customer_id', $transaction->customer_id)->get();
         // $data = Transaction::where('customer_id', $transaction->id)->first();
         // if (empty($data)) {
         //     echo "Kosong";

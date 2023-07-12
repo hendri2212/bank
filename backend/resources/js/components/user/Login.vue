@@ -37,8 +37,8 @@
         data(){
             return {
                 url         : window.location.origin,
-                email       : 'arifin.hendri465@gmail.com',
-                password    : 'administrator'
+                email       : '',
+                password    : ''
             }  
         },
         methods: {

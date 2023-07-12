@@ -1,8 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '../components/Dashboard.vue'
+// import { useBankStore } from '../store'
 
 const router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
+    // base: 'localhost:8000',
+    // history: createWebHistory(import.meta.env.BASE_URL),
+    history: createWebHistory(''),
     routes: [
         {
             path        : '/',
@@ -12,18 +15,48 @@ const router = createRouter({
                 name    : 'Dashboard Page'
             }
         },
-        // {
-        //     path: '/about',
-        //     name: 'about',
-        //     // route level code-splitting
-        //     // this generates a separate chunk (About.[hash].js) for this route
-        //     // which is lazy-loaded when the route is visited.
-        //     component: () => import('../views/AboutView.vue')
-        // },
         {
-            path        : '/transaksi',
+            path        : '/login',
+            name        : 'login',
+            component   : () => import('../components/user/Login.vue'),
+        },
+        {
+            path        : '/employee',
+            component   : () => import('../views/Employee.vue'),
+            children    : [
+                {
+                    path        : '',
+                    name        : 'employee',
+                    component   : () => import('../components/user/Data.vue'),
+                    meta        : {
+                        name    : "Employee Page",
+                        role    : "superadmin" || "manager"
+                    },
+                },
+                {
+                    path        : 'add',
+                    name        : 'new_employee',
+                    component   : () => import('../components/user/Add.vue'),
+                    meta        : {
+                        name    : "Add New Employee",
+                        role    : "superadmin" || "manager"
+                    }
+                },
+                {
+                    path        : 'edit/:id',
+                    name        : 'edit_employee',
+                    component   : () => import('../components/user/Edit.vue'),
+                    meta        : {
+                        name    : "Edit Employee",
+                        role    : "superadmin" || "manager"
+                    }
+                }
+            ]
+        },
+        {
+            path        : '/transaction',
             name        : 'transaction',
-            component   : () => import('../components/Transaction.vue'),
+            component   : () => import('../components/transaction/Transaction.vue'),
             meta        : {
                 name    : "Create Transaction"
             }
@@ -31,20 +64,57 @@ const router = createRouter({
         {
             path        : '/history',
             name        : 'history',
-            component   : () => import('../components/History.vue'),
+            component   : () => import('../components/transaction/History.vue'),
             meta        : {
                 name    : "History Transaction"
             }
         },
         {
-            path        : '/customer',
-            name        : 'customer',
-            component   : () => import('../components/Customer.vue'),
+            path        : '/detail/:id',
+            name        : 'detail',
+            component   : () => import('../components/transaction/Detail.vue'),
             meta        : {
-                name    : "Data Customers"
+                name    : "Details Transacation"
             }
-        }
+        },
+        {
+            path        : '/customer',
+            component   : () => import('../views/Customer.vue'),
+            children    : [
+                {
+                    path        : '',
+                    name        : 'customer',
+                    component   : () => import('../components/customer/Data.vue'),
+                    meta        : {
+                        name    : "Data Customer"
+                    }
+                }
+            ]
+        },
+        {
+            path        : '/new_customer',
+            name        : 'new_customer',
+            component   : () => import('../components/customer/New_Customer.vue'),
+            meta        : {
+                name    : "Add New Customers"
+            }
+        },
     ]
+})
+
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.role)) {
+        // console.log(store.state.role)
+        // console.log(useBankStore().token)
+        // if(store.state.level=='admin'){
+        if(localStorage.role=='superadmin' || localStorage.role=='manager'){
+            next()
+            return
+        }
+        router.push({ name: "dashboard" })
+        return
+    }
+    next() 
 })
 
 export default router
