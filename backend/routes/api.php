@@ -31,8 +31,9 @@ Route::middleware('auth:sanctum')->group(function(){
         // return $request->user()->id;
         return $request->user();
     });
-    Route::resource('user', UserController::class);
     Route::resource('transaction', TransactionController::class)->except(['destroy']);
+    Route::get('/balance/{id}', [TransactionController::class, 'balance']);
+    Route::resource('user', UserController::class);
     Route::resource('customer', CustomerController::class);
 });
 Route::post('/login', [UserController::class, 'login']);

@@ -85,6 +85,12 @@ class TransactionController extends Controller
         // }
     }
 
+    public function balance(Request $request) {
+        // return $request->id;
+        return Transaction::where('customer_id', $request->id)->latest()->first();
+        // return Transaction::select('balance')->where('customer_id', '0553550663')->latest()->first();
+    }
+
     /**
      * Update the specified resource in storage.
      *
