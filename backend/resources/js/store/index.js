@@ -7,7 +7,8 @@ import { defineStore } from 'pinia'
 // export const useAlertsStore = defineStore('alerts', {
   // other options...
 // })
-var host = window.location.origin;
+// var host = window.location.origin;
+var host = window.location.hostname=='127.0.0.1' ? 'http://127.0.0.1:8000' : 'https://saijaan.smkn1kotabaru.xyz';
 export const useBankStore = defineStore('bank', {
     state: () => ({
         count       : 0,
