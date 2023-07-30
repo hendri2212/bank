@@ -34,7 +34,7 @@
                 <th>Description</th>
                 <th class="text-center">Type</th>
                 <th class="text-end">Total</th>
-                <th class="text-end">Last Balance</th>
+                <th class="text-end" colspan="">Last Balance</th>
             </thead>
             <tbody>
                 <tr v-if="history==''">
@@ -48,12 +48,16 @@
                             day: "numeric",
                         }).format(new Date(data.created_at)) }}
                     </td>
-                    <!-- <td>{{ data.created_at }}</td> -->
-                    <td>{{ data.user.name }}</td>
+                    <td>{{ data.user.name }}</td>   
                     <td>{{ data.description }}</td>
                     <td class="text-center">{{ data.type }}</td>
                     <td class="text-end">{{ new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.amount) }}</td>
                     <td class="text-end">{{ new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.balance) }}</td>
+                    <td v-if="role=='superadmin'">
+                        <router-link :to="{ name: 'edit', params: { id: data.id } }">
+                            <i class="bi bi-pencil-square"></i>
+                        </router-link>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -65,6 +69,7 @@ import axios from "axios"
 export default {
     data(){
         return {
+            role            : localStorage.role,
             member_details  : null,
             history         : [],
             url             : window.location.origin
