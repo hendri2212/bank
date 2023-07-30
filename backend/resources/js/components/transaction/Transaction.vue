@@ -133,8 +133,10 @@ export default {
             })
             .catch(function (error){
                 if (error.request.status==500){
-                // if (error.request.status==404){
-                    swal("Gagal", "Hubungi administrator", "error");
+                    // swal("Gagal", "Hubungi administrator", "error");
+                    swal("Gagal", "Anda belum pernah menabung", "error");
+                } else if (error.request.status==404){
+                    swal("Gagal", "Tabungan anda tidak cukup", "error");
                 }
             })
         },
