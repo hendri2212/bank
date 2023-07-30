@@ -73,8 +73,10 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
-    {
-        //
+    // public function destroy(Customer $customer) {
+    public function destroy(Request $request, $id) {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json("Logout", 200);
+        // return $request->user();
     }
 }

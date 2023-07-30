@@ -28,8 +28,18 @@ class TransactionController extends Controller
      */
     public function store(Request $request) {
         $balance = Transaction::where('customer_id', $request->customer_id)->latest('id')->first();
-        
-        if (empty($balance)) {
+        // return 'hasil'.$balance->balance;
+
+        if ($balance->balance==0 && $request->type== 'Debet') {
+            // if ($request->type == 'Debet' && $request->amount >= 0) {
+                return response()->json("Anda Belum Pernah Menabung", 404);
+                // return redirect()->back()->with('alert','hello');
+            // } else {
+            //     $total = $request->amount;
+            // }
+        }
+
+        if (empty($balance) OR $balance==null) {
             if ($request->type == 'Debet' && $request->amount >= 0) {
                 // return response()->json("Anda Belum Pernah Menabung", 404);
                 return redirect()->back()->with('alert','hello');
@@ -87,8 +97,12 @@ class TransactionController extends Controller
 
     public function balance(Request $request) {
         // return $request->id;
-        return Transaction::where('customer_id', $request->id)->latest()->first();
-        // return Transaction::select('balance')->where('customer_id', '0553550663')->latest()->first();
+        // return Transaction::where('customer_id', $request->id)->latest()->first();
+        return Transaction::select('balance')->where('customer_id', $request->id)->latest()->first();
+    }
+
+    public function edit(Transaction $transaction, Request $request) {
+        return Transaction::with('User')->where('id', $request->id)->first();
     }
 
     /**

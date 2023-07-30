@@ -33,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function(){
     });
     Route::resource('transaction', TransactionController::class)->except(['destroy']);
     Route::get('/balance/{id}', [TransactionController::class, 'balance']);
+    Route::get('/edit/{id}', [TransactionController::class, 'edit']);
     Route::resource('user', UserController::class);
     Route::resource('customer', CustomerController::class);
 });
