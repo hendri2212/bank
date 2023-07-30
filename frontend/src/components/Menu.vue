@@ -2,7 +2,7 @@
     <div class="container bg-white">
         <div class="row text-center my-3">
             <div class="col-3">
-                <router-link :to="{ name: 'balance'}" class="d-flex flex-column shadow rounded-3 my-3 text-decoration-none text-reset">
+                <router-link :to="{ name: 'balance' }" class="d-flex flex-column shadow rounded-3 my-3 text-decoration-none text-reset">
                     <i class="bi bi-cash-coin fs-2 text-success"></i>
                     <label for="history" class="fw-bold">Balance</label>
                 </router-link>
