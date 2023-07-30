@@ -45,6 +45,14 @@ const router = createRouter({
             meta      : {
                 name  : "Login Page"
             }
+        },
+        {
+            path      : '/profile',
+            name      : 'profile',
+            component : () => import('../components/user/Profile.vue'),
+            meta      : {
+                name  : "Profile Page"
+            }
         }
     ]
 })

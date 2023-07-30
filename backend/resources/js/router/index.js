@@ -63,19 +63,33 @@ const router = createRouter({
         },
         {
             path        : '/history',
-            name        : 'history',
-            component   : () => import('../components/transaction/History.vue'),
-            meta        : {
-                name    : "History Transaction"
-            }
-        },
-        {
-            path        : '/detail/:id',
-            name        : 'detail',
-            component   : () => import('../components/transaction/Detail.vue'),
-            meta        : {
-                name    : "Details Transacation"
-            }
+            component   : () => import('../views/History.vue'),
+            children    : [
+                {
+                    path        : '',
+                    component   : () => import('../components/transaction/History.vue'),
+                    name        : 'history',
+                    meta        : {
+                        name    : "History Transaction"
+                    }
+                },
+                {
+                    path        : 'detail/:id',
+                    name        : 'detail',
+                    component   : () => import('../components/transaction/Detail.vue'),
+                    meta        : {
+                        name    : "Details Transacation"
+                    }
+                },
+                {
+                    path        : 'edit/:id',
+                    name        : 'edit',
+                    component   : () => import('../components/transaction/Edit.vue'),
+                    meta        : {
+                        name    : "Edit Transaction"
+                    }
+                }
+            ]
         },
         {
             path        : '/customer',
@@ -88,17 +102,17 @@ const router = createRouter({
                     meta        : {
                         name    : "Data Customer"
                     }
+                },
+                {
+                    path        : 'new_customer',
+                    name        : 'new_customer',
+                    component   : () => import('../components/customer/New_Customer.vue'),
+                    meta        : {
+                        name    : "Add New Customers"
+                    }
                 }
             ]
-        },
-        {
-            path        : '/new_customer',
-            name        : 'new_customer',
-            component   : () => import('../components/customer/New_Customer.vue'),
-            meta        : {
-                name    : "Add New Customers"
-            }
-        },
+        }
     ]
 })
 
