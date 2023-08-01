@@ -12,7 +12,7 @@
                     <th>Full Name</th>
                     <th>Role</th>
                     <th>email</th>
-                    <th>status</th>
+                    <!-- <th>status</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -21,12 +21,12 @@
                     <td>{{ data.name }}</td>
                     <td>{{ data.role }}</td>
                     <td>{{ data.email }}</td>
-                    <td>
+                    <!-- <td>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked> -->
                             <!-- <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label> -->
-                        </div>
-                    </td>
+                        <!-- </div>
+                    </td> -->
                     <td>
                         <div class="dropdown">
                             <i class="bi bi-three-dots-vertical" data-bs-toggle="dropdown" aria-expanded="false"></i>
@@ -35,10 +35,10 @@
                                     <router-link class="dropdown-item text-secondary" :to="{ name: 'edit_employee', params: { id: data.id } }">
                                     <i class="bi bi-pencil me-1"></i> Edit</router-link>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a class="dropdown-item text-secondary" href="#">
                                     <i class="bi bi-trash me-1"></i> Delete</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </td>

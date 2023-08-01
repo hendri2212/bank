@@ -16,13 +16,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(data, index) in member" :key="index">
+                <tr v-if="member==''" class="text-center">
+                    <td colspan="5">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr v-else v-for="(data, index) in member" :key="index">
                     <td scope="row">{{ index+1 }}</td>
                     <td>{{ data.full_name }}</td>
                     <td>{{ data.nisn }}</td>
                     <td>{{ data.mobile_phone }}</td>
                     <td>{{ data.major_name }}</td>
-                    <td>
+                    <!-- <td>
                         <div class="dropdown">
                             <i class="bi bi-three-dots-vertical" data-bs-toggle="dropdown" aria-expanded="false"></i>
                             <ul class="dropdown-menu">
@@ -36,7 +43,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </td>
+                    </td> -->
                 </tr>
             </tbody>
         </table>
@@ -47,7 +54,7 @@ import axios from "axios"
 export default {
     data() {
         return {
-            member          : []
+            member : []
         }
     },
     created() {
