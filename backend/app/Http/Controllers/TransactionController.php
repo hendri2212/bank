@@ -16,7 +16,8 @@ class TransactionController extends Controller
      */
     public function index() {
         // return Transaction::all();
-        return Transaction::with('User')->get();
+        // return Transaction::with('User')->get();
+        return Transaction::with('User')->orderBy('id', 'desc')->get();
         // return Transaction::with('User', 'Customer')->get();
     }
 
