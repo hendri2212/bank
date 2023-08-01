@@ -27,20 +27,24 @@
                 </tbody>
             </table>
         </div>
-        <table class="table table-striped">
+        <table class="table table-striped" id="myTable">
             <thead>
-                <th>Created</th>
-                <th>Teller</th>
-                <th>Description</th>
-                <th class="text-center">Type</th>
-                <th class="text-end">Total</th>
-                <th class="text-end" colspan="">Last Balance</th>
+                <tr>
+                    <th>Created</th>
+                    <th>Teller</th>
+                    <th>Description</th>
+                    <th class="text-center">Type</th>
+                    <th class="text-end">Total</th>
+                    <th class="text-end">Last Balance</th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-                <tr v-if="history==''">
+                <!-- <tr v-if="history==''">
                     <td colspan="7" class="fw-bold text-center">Loading</td>
-                </tr>
-                <tr v-else v-for="(data, index) in history" :key="index">
+                </tr> -->
+                <!-- <tr v-else v-for="(data, index) in history" :key="index"> -->
+                <tr v-for="(data, index) in history" :key="index">
                     <td>{{ new Intl.DateTimeFormat('id-ID',{
                             weekday: "long",
                             year: "numeric",
@@ -94,6 +98,21 @@ export default {
         .then(response => {
             this.history = response.data
         })
+    },
+    beforeUpdate: function() {
+        let table = new DataTable('#myTable')
+        if (table) {
+            table.destroy()
+        }
+    },
+    updated: function() {
+        new DataTable('#myTable',{
+            "responsive": true,
+            "ordering": false,
+            "searching": false,
+            dom: 'Bfrtip',
+            buttons: [],
+        });
     }
 }
 </script>

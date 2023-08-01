@@ -3,29 +3,32 @@
 </script>
 <template>
     <Navbar />
-    <div class="px-3">
+    <!-- <div class="px-3">
         <input list="browsers" name="browser" id="browser" class="form-control">
         <datalist id="browsers">
-            <option :value="data.nisn" v-for="(data, index) in member" :key="index" :label="data.full_name"></option>
+            <option :value="data.nisn" v-for="(data, index) in member" :key="index" :label="data.full_name"></option> -->
             <!-- <option value="Edge" @click="change(id='1', index)"></option> -->
-        </datalist>
-    </div>
+        <!-- </datalist>
+    </div> -->
     <div class="container bg-white py-2">
-        <table class="table table-striped">
+        <table class="table table-striped" id="myTable">
             <thead>
-                <th>Created</th>
-                <th>Teller</th>
-                <th>Customer</th>
-                <th>Description</th>
-                <th class="text-center">Type</th>
-                <th class="text-end">Total</th>
-                <th class="text-end">Last Balance</th>
+                <tr>
+                    <th>Created</th>
+                    <th>Teller</th>
+                    <th>Customer</th>
+                    <th>Description</th>
+                    <th class="text-center">Type</th>
+                    <th class="text-end">Total</th>
+                    <th class="text-end">Last Balance</th>
+                </tr>
             </thead>
             <tbody>
-                <tr v-if="history==''">
+                <!-- <tr v-if="history==''">
                     <td colspan="7" class="fw-bold text-center">Loading</td>
-                </tr>
-                <tr v-else v-for="(data, index) in history" :key="index">
+                </tr> -->
+                <!-- <tr v-else v-for="(data, index) in history" :key="index"> -->
+                <tr v-for="(data, index) in history" :key="index">
                     <td>{{ new Intl.DateTimeFormat('id-ID',{
                             weekday: "long",
                             year: "numeric",
@@ -33,7 +36,6 @@
                             day: "numeric",
                         }).format(new Date(data.created_at)) }}
                     </td>
-                    <!-- <td>{{ data.created_at }}</td> -->
                     <td>{{ data.user.name }}</td>
                     <td>
                         <router-link :to="{ name: 'detail', params: { id: data.customer_id } }">
@@ -72,7 +74,6 @@ export default {
             }
         })
         .then(response => {
-            // console.log(response.data[0].amount)
             this.history = response.data
         })
 
@@ -81,6 +82,20 @@ export default {
         .then(response => {
             this.member = response.data
         })
+    },
+    beforeUpdate: function() {
+        let table = new DataTable('#myTable')
+        if (table) {
+            table.destroy()
+        }
+    },
+    updated: function() {
+        new DataTable('#myTable',{
+            "responsive": true,
+            "ordering": false,
+            dom: 'Bfrtip',
+            buttons: ['excel'],
+        });
     }
 }
 </script>
