@@ -29,24 +29,22 @@ class TransactionController extends Controller
      */
     public function store(Request $request) {
         $balance = Transaction::where('customer_id', $request->customer_id)->latest('id')->first();
-        // return 'hasil'.$balance->balance;
+        // return 'hasil'.$balance;
 
-        if ($balance->balance==0 && $request->type== 'Debet') {
+        if (empty($balance) OR $balance=='') {
+            if ($request->type == 'Debet' && $request->amount >= 0) {
+                return response()->json("Tabungan Anda Kosong", 404);
+                // return redirect()->back()->with('alert','hello');
+            } else {
+                $total = $request->amount;
+            }
+        } else if ($balance->balance==0 && $request->type== 'Debet') {
             // if ($request->type == 'Debet' && $request->amount >= 0) {
                 return response()->json("Anda Belum Pernah Menabung", 404);
                 // return redirect()->back()->with('alert','hello');
             // } else {
             //     $total = $request->amount;
             // }
-        }
-
-        if (empty($balance) OR $balance==null) {
-            if ($request->type == 'Debet' && $request->amount >= 0) {
-                // return response()->json("Anda Belum Pernah Menabung", 404);
-                return redirect()->back()->with('alert','hello');
-            } else {
-                $total = $request->amount;
-            }
         } else {
             if ($request->type == 'Credit') {
                 $total = $balance->balance+$request->amount;
