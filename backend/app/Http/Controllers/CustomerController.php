@@ -62,9 +62,9 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
-    {
-        //
+    public function update(Request $request, Customer $customer) {
+        // return $request->id;
+        return 'tes';
     }
 
     /**

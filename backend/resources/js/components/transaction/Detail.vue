@@ -36,7 +36,7 @@
                     <th class="text-center">Type</th>
                     <th class="text-end">Total</th>
                     <th class="text-end">Last Balance</th>
-                    <th></th>
+                    <th v-if="role=='superadmin'"></th>
                 </tr>
             </thead>
             <tbody>

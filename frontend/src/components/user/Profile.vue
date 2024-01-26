@@ -5,7 +5,7 @@
     <Navbar />
     <main class="container bg-white py-2">
         <span class="fw-bold">Data Personal</span>
-        <table class="table table-striped">
+        <table class="table table-striped mt-2">
             <tbody>
                 <tr class="placeholder-glow">
                     <th scope="row">Full Name</th>
@@ -25,7 +25,7 @@
                 </tr>
             </tbody>
         </table>
-        <a href='change-password'>Change Password</a>
+        <router-link :to='{ name:"change-password" }'>Change Password</router-link>
         <br><br>
         <button class="btn btn-sm btn-danger" @click="logout">Log Out</button>
     </main>

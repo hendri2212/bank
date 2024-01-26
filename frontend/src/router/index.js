@@ -1,14 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import User from '../views/User.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
-        {
-            path: '/xxx',
-            name: 'home',
-            component: HomeView
-        },
         {
             path: '/about',
             name: 'about',
@@ -48,11 +43,25 @@ const router = createRouter({
         },
         {
             path      : '/profile',
-            name      : 'profile',
-            component : () => import('../components/user/Profile.vue'),
-            meta      : {
-                name  : "Profile Page"
-            }
+            component : User,
+            children  : [
+                {
+                    path : '',
+                    name : 'profile',
+                    component : () => import('../components/user/Profile.vue'),
+                    meta      : {
+                        name  : "Profile Page"
+                    }
+                },
+                {
+                    path : 'change-password',
+                    name : 'change-password',
+                    component : () => import('../components/user/Password.vue'),
+                    meta      : {
+                        name  : "Change Password"
+                    }
+                }
+            ]
         }
     ]
 })

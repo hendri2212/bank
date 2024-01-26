@@ -24,19 +24,19 @@
                     Dashboard
                 </router-link>
             </li>
-            <li>
+            <li v-if="role=='superadmin' || role=='manager' || role=='teller'">
                 <router-link :to="{ name: 'transaction' }" class="nav-link text-white">
                     <i class="bi bi-arrow-down-up me-2" width="16" height="16"></i>
                     Transaction
                 </router-link>
             </li>
-            <li>
+            <li v-if="role=='superadmin' || role=='manager' || role=='teller'">
                 <router-link :to="{ name: 'history' }" class="nav-link text-white">
                     <i class="bi bi-clock-history me-2" width="16" height="16"></i>
                     Data History
                 </router-link>
             </li>
-            <li>
+            <li v-if="role=='superadmin' || role=='manager' || role=='service'">
                 <router-link :to="{ name: 'customer' }" class="nav-link text-white">
                     <i class="bi bi-people me-2" width="16" height="16"></i>
                     Customers

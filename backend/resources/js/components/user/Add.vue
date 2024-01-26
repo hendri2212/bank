@@ -21,7 +21,7 @@
             <div class="mb-3" v-if="status=='superadmin' || status=='manager'">
                 <label class="form-label">Role</label>
                 <select v-model="role" class="form-control">
-                    <option value="manager" v-if="role=='superadmin'">Manager</option>
+                    <option value="manager" v-if="status=='superadmin'">Manager</option>
                     <option value="teller">Teller</option>
                     <option value="service">Service</option>
                 </select>
@@ -53,7 +53,7 @@
                     name    : this.name,
                     email   : this.email,
                     password: this.password,
-                    status  : this.status
+                    role    : this.role
                 }
                 axios
                 .post(`${this.url}/api/user`, data, {

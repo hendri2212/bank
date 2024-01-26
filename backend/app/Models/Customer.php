@@ -14,7 +14,8 @@ class Customer extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     // use HasFactory;
 
-    protected $guard = 'customer';
+    // protected $guard = 'customer';
+    protected $primaryKey = 'nisn';
 
     protected $fillable = [
         'nisn',
