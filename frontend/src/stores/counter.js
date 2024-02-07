@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-var host = window.location.hostname=='127.0.0.1' ? 'http://127.0.0.1:8000' : 'https://saijaan.smkn1kotabaru.xyz';
+var host = window.location.hostname=='127.0.0.1' ? 'http://127.0.0.1:8000' : 'https://skawan.smkn1kotabaru.sch.id';
 
 export const useCounterStore = defineStore('counter', {
     state: () => ({
