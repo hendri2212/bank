@@ -1,27 +1,10 @@
-<template>
-    <Navbar />
-    <main class="container bg-white py-2">
-        <span class="fw-bold">Total Your Balance</span>
-        <br>
-        <span class="h3 text-success">{{ new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(this.saldo) }}</span>
-        <!-- <span class="h3 text-success">{{ new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(this.balance) }}</span> -->
-    </main>
-</template>
-<script>
-// import axios from "axios"
-import Navbar from '../components/Navbar.vue'
-import { useCounterStore } from '../stores/counter.js'
+<script setup>
+    import Navbar from '../components/Navbar.vue'
+    import { useCounterStore } from '../stores/counter.js'
+    import { ref, onMounted } from 'vue'
 
-export default {
-    components: {
-        Navbar
-    },
-    data(){
-        return {
-            saldo : null
-        }
-    },
-    created(){
+    const saldo = ref(null)
+    onMounted(() => {
         axios
         .get(`${useCounterStore().url}/api/balance/${localStorage.nisn}`, {
             headers:{
@@ -30,11 +13,18 @@ export default {
         })
         .then(response => {
             if(response.data.balance == null || response.data.balance == undefined){
-                this.saldo = 0
+                saldo.value = 0
             }else{
-                this.saldo = response.data.balance
+                saldo.value = response.data.balance
             }
         })
-    }
-}
+    })
 </script>
+<template>
+    <Navbar />
+    <main class="container bg-white py-2">
+        <span class="fw-bold">Total Your Balance</span>
+        <br>
+        <span class="h3 text-success">{{ new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(saldo) }}</span>
+    </main>
+</template>
